@@ -1,0 +1,9 @@
+# R and RStudio
+.Rproj.user
+.Rhistory
+.Rdata
+*.Rproj
+
+# others
+/data
+/scripts_originales
