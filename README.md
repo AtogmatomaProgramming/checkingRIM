@@ -14,7 +14,7 @@ para considerar los muestreos chequeados.
 ## Requisitos
 Son necesarias las librerías de R *sapmuebase*, *dplyr*, *openxlsx* y *pivottabler*.
 
-Este script consta de los archivos chequeo_muestreos_MT2.R y functions.R.
+Este script consta de los archivos chequeo_muestreos_RIM.R y functions.R.
 
 El script requiere dos de los informes '*tallas por up*' que se obtienen del SIRENO.
 En concreto:

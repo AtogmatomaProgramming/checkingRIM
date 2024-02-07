@@ -1,6 +1,7 @@
 # CHECK MT2 SAMPLES ------------------------------------------------------------
 ## INSTRUCTIONS ----------------------------------------------------------------
-# Script para generar los ficheros excel usados en el chequeo de los muestreos MT2 de RIM.
+# Script para generar los ficheros excel usados en el chequeo de los muestreos
+# MT2 de RIM.
 #
 # Puedes encontrar instrucciones más detalladas en el fichero README.md.
 # 
@@ -12,7 +13,8 @@
 # Cada fichero contiene los campos necesarios que hay que comprobar manualmente 
 # para considerar los muestreos chequeados.
 # 
-# El script necesita dos de los informes 'tallas por up' que se obtienen del SIRENO.
+# El script necesita dos de los informes 'tallas por up' que se obtienen del
+# SIRENO.
 # En concreto:
 #   - capturas (IEOUPMUEDESTOT.TXT)
 #   - capturas de especies medidas (IEOUPDESTAL.TXT)
@@ -36,7 +38,7 @@
 # Los ficheros generados se guardan en la carpeta YEAR_MONTH.
 
 
-## LIBRARIES --------------------------------------------------------------------
+## LIBRARIES -------------------------------------------------------------------
 library(sapmuebase)
 library(dplyr)
 library(openxlsx)
@@ -44,7 +46,7 @@ library(pivottabler)
 source("functions.R")
 
 
-## YOU ONLY HAVE TO CHANGE THIS VARIABLES ---------------------------------------
+## YOU ONLY HAVE TO CHANGE THIS VARIABLES --------------------------------------
 # Year to check
 YEAR <- "2022"
 
@@ -56,18 +58,18 @@ FILENAME_DES_TOT <- paste0("IEOUPMUEDESTOTMARCO.TXT")
 FILENAME_DES_TAL <- paste0("IEOUPMUEDESTALMARCO.TXT")
 
 # Ports you want to check. Pay attention to spelling.
-MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances", "Santander")
+MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances",
+              "Santander")
 
 
-## GLOBAL VARIABLES - DON'T CHANGE IT -------------------------------------------
-PATH_FILES <- paste0(getwd(), YEAR, "/", MONTH)
+## GLOBAL VARIABLES - DON'T CHANGE IT ------------------------------------------
 DATA_PATH <- paste0(getwd(),"/data/", YEAR, "/", YEAR, "_", MONTH)
 
 
-## IMPORT DATA
+## IMPORT DATA -----------------------------------------------------------------
 capturas_tot <- importRIMCatches(FILENAME_DES_TOT, path = DATA_PATH)
 tallas <- importRIMCatchesInLengths(FILENAME_DES_TAL, path = DATA_PATH)
 
 
-# CREATE FILES
+## CREATE FILES ----------------------------------------------------------------
 createCheckFilesXlsx(capturas_tot, tallas)
