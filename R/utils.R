@@ -1,6 +1,6 @@
 #' Filter data frame by port.
 #'
-#' @detail Variable "PUERTO" is needed in the data frame.
+#' @details Variable "PUERTO" is needed in the data frame.
 #' @param df data frame to filter.
 #' @return data frame filtered by port.
 #' @noRd
