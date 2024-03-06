@@ -5,6 +5,6 @@
 *.Rproj
 
 # others
-/data
+/results
 /scripts_originales
 *.afphoto
