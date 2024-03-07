@@ -22,10 +22,6 @@ createHeadersXls <- function (lens) {
   openxlsx::addWorksheet(wb, name_worksheet)
   openxlsx::writeData(wb, name_worksheet, check_headers)
 
-  # what is this line doing??:
-  # "The path to zip. Used by zip and by R CMD INSTALL --build on Windows."
-  Sys.setenv(R_ZIPCMD = "C:/Rtools/bin/zip.exe")
-
   filename <- file.path(DATA_PATH, paste0(name_worksheet, ".xlsx"))
 
   exportXlsFile(wb, filename)
