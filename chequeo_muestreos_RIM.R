@@ -46,6 +46,9 @@ library(pivottabler)
 source("functions.R")
 source("R/utils.R")
 
+#New needed libraries
+
+
 
 ## YOU ONLY HAVE TO CHANGE THIS VARIABLES --------------------------------------
 # Year to check
@@ -64,8 +67,10 @@ MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances",
 
 
 ## GLOBAL VARIABLES - DON'T CHANGE IT ------------------------------------------
+
 DATA_PATH <- paste0(getwd(),"/results/", YEAR, "/", YEAR, "_", MONTH)
 
+# Alternative version
 
 ## IMPORT DATA -----------------------------------------------------------------
 capturas_tot <- importRIMCatches(FILENAME_DES_TOT, path = DATA_PATH)
