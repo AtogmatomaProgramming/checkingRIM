@@ -1,7 +1,6 @@
 #' Create header file to facilitate the manual sampling check.
 #' @param lens Lengths data frame of Sireno report.
 #' @return Export xlsx file with headers resume.
-
 createHeadersXls <- function (lens) {
   check_headers<-aggregate(lens[,c("COD_ID"), ],
                            by=list(PUERTO=lens$PUERTO, FECHA_MUE=lens$FECHA_MUE,
@@ -22,6 +21,8 @@ createHeadersXls <- function (lens) {
   openxlsx::addWorksheet(wb, name_worksheet)
   openxlsx::writeData(wb, name_worksheet, check_headers)
 
+  # what is this line doing??:
+  # "The path to zip. Used by zip and by R CMD INSTALL --build on Windows."
   Sys.setenv(R_ZIPCMD = "C:/Rtools/bin/zip.exe")
 
   filename <- file.path(DATA_PATH, paste0(name_worksheet, ".xlsx"))
