@@ -1,6 +1,7 @@
 #' Create header file to facilitate the manual sampling check.
 #' @param lens Lengths data frame of Sireno report.
 #' @return Export xlsx file with headers resume.
+#' @export
 createHeadersXls <- function (lens) {
   check_headers<-aggregate(lens[,c("COD_ID"), ],
                            by=list(PUERTO=lens$PUERTO, FECHA_MUE=lens$FECHA_MUE,
