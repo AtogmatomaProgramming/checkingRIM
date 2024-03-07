@@ -1,10 +1,11 @@
 Package: checkingRIM
-Title: What the Package Does (One Line, Title Case)
+Title: Create Files to Facilitate the Checking of Samples.
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Create different xlsx files to facilitate the checking of samples,
+whith only the fields required in the checking process.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
