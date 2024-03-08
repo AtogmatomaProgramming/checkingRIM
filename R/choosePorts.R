@@ -7,23 +7,30 @@
 
 choosePorts <- function(){
   
-  ports <- dlgInput(message="Ingrese puertos de estudio (Formato: Santoña, Viveiro, ...):")$res
-  ports <- unlist(str_split(ports, pattern =  ", "))
+  ports <- dlgInput(message="Ingrese puertos de estudio (Formato: SANTOÑA,VIVEIRO,...):")$res
+  ports <- gsub(" ", "", ports)
+  ports <- strsplit(ports, ",")
+  ports <- unlist(ports)
+  ports <- toupper(ports)
   dfIngresedPorts <- data.frame(PUERTO = ports)
-  puertos <- puerto
-  puertos$TESTIGO <- "T"
-  dfCheckPuerto <- merge(dfIngresedPorts, puertos, all.x =TRUE)
-  dfCheckPuerto <- dfCheckPuerto[is.na(dfCheckPuerto$TESTIGO), ]
+  comparativePorts <- sapmuebase::puerto
+  comparativePorts$PUERTO <- toupper(comparativePorts$PUERTO)
+  comparativePorts$PUERTO <- ports <- gsub(" ", "", comparativePorts$PUERTO)
+  dfCheckPuerto <- merge(dfIngresedPorts, comparativePorts, all.x =TRUE)
+  dfCheckPuerto <- dfCheckPuerto[is.na(dfCheckPuerto$COD_PUERTO), ]
   
   if(nrow(dfCheckPuerto)!=0){
     
     badPorts <- dfCheckPuerto$PUERTO
-    badPorts <- str_c(badPorts, collapse = ", ")
-    warningMessage = paste0("Ha insertado mal los siguientes puertos: ", badPorts, ". Por favor, insértelos de nuevo correctamente")
+    badPorts <- paste(badPorts, collapse=", ")
+    warningMessage = paste0("Ha insertado mal/no se encuentran los siguientes puertos: ", badPorts, " Por favor, insértelos de nuevo correctamente")
     ports <- dlgInput(message=warningMessage)$res
-    ports <- unlist(str_split(ports, pattern =  ", "))
+    ports <- gsub(" ", "", ports)
+    ports <- strsplit(ports, ",")
+    ports <- unlist(ports)
+    ports <- toupper(ports)
     
-    filterCodPor <- puertos[puertos$PUERTO %in% ports, ]
+    filterCodPor <- comparativePorts[comparativePorts$PUERTO %in% ports, ]
     portsCode <- as.vector(filterCodPor$COD_PUERTO)
     
   } else {
