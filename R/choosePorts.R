@@ -15,7 +15,7 @@ choosePorts <- function(){
   dfIngresedPorts <- data.frame(PUERTO = ports)
   comparativePorts <- sapmuebase::puerto
   comparativePorts$PUERTO <- toupper(comparativePorts$PUERTO)
-  comparativePorts$PUERTO <- ports <- gsub(" ", "", comparativePorts$PUERTO)
+  comparativePorts$PUERTO <- gsub(" ", "", comparativePorts$PUERTO)
   dfCheckPuerto <- merge(dfIngresedPorts, comparativePorts, all.x =TRUE)
   dfCheckPuerto <- dfCheckPuerto[is.na(dfCheckPuerto$COD_PUERTO), ]
   
