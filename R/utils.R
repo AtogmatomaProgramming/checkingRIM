@@ -1,11 +1,12 @@
 #' Filter data frame by port.
 #'
-#' @details Variable "PUERTO" is needed in the data frame.
+#' @details Variable "COD_PUERTO" is needed in the data frame.
 #' @param df data frame to filter.
+#' @param codPorts vector with the code ports to filter.
 #' @return data frame filtered by port.
 #' @noRd
-filterPorts <- function(df){
-  f <- df[which(df[["PUERTO"]]%in%MY_PORTS),]
+filterPorts <- function(df, codPorts){
+  f <- df[which(df[["COD_PUERTO"]] %in% codPorts),]
   return (f)
 }
 

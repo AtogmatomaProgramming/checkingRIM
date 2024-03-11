@@ -5,11 +5,11 @@
 #' importRIMFiles() functions.
 #' @return export all the previous xls files generated
 #' @export
-createCheckFilesXlsx <- function(capturas_tot, tallas){
+createCheckFilesXlsx <- function(capturas_tot, tallas, codPuertos){
 
   # clean data
-  lens <- filterPorts(tallas)
-  catches <- filterPorts(capturas_tot)
+  lens <- filterPorts(tallas, codPuertos)
+  catches <- filterPorts(capturas_tot, codPuertos)
   catches <- catches[catches$COD_TIPO_MUE=="2",]
 
   #names of files
