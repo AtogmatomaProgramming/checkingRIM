@@ -39,3 +39,44 @@ userInput <- function(prompt) {
 exportXlsFile <- function(wb, filename){
   openxlsx::saveWorkbook(wb, filename, overwrite = TRUE)
 }
+
+
+#' Dialog box to choise our working ports.
+#' 
+#' @details
+#' This is a function where we developed a dialog box if you want 
+#' to work choosing by your own the ports what you need instead 
+#' using the conventional way, through a string vector
+#'
+#' @param master_data_port the master data port "PUERTO" from sapmuebase
+#' @noRd
+manage_dialog_box <- function(master_data_ports) {
+  list_port <- as.vector(master_data_ports$PUERTO)
+  answer <- TRUE
+  while (answer) {
+    selected_ports <- dlgList(list_port,
+                              multiple = TRUE,
+                              title = "PUERTOS TRABAJO"
+    )
+    
+    if (length(selected_ports$res) == 0) {
+      warning_message <- winDialog(type = "yesno", 
+                                   message = "¿Está seguro de que no quiere selecionar ningún puerto?")
+      if (warning_message != "NO") {
+        answer <- FALSE
+      }
+    } else if (length(selected_ports$res) == 1) {
+      warning_message <- winDialog(type = "yesno", 
+                                   message = "Solo ha seleccionado un puerto. ¿Está seguro de que quiere continuar?")
+      if (warning_message != "NO") {
+        answer <- FALSE
+      }
+    } else {
+      answer <- FALSE
+    }
+  }
+  
+  work_ports <- as.vector(selected_ports$res)
+  codes_work_ports <- as.vector(master_data_ports[master_data_ports$PUERTO %in% work_ports, "COD_PUERTO"])
+}
+
