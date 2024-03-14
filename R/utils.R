@@ -2,11 +2,11 @@
 #'
 #' @details Variable "COD_PUERTO" is needed in the data frame.
 #' @param df data frame to filter.
-#' @param codPorts vector with the code ports to filter.
+#' @param cod_ports vector with the code ports to filter.
 #' @return data frame filtered by port.
 #' @noRd
-filterPorts <- function(df, codPorts){
-  f <- df[which(df[["COD_PUERTO"]] %in% codPorts),]
+filter_ports <- function(df, cod_ports){
+  f <- df[which(df[["COD_PUERTO"]] %in% cod_ports),]
   return (f)
 }
 
@@ -21,7 +21,7 @@ filterPorts <- function(df, codPorts){
 #' @param prompt Message to show in the command line.
 #' @return Character read from the response of the user.
 #' @noRd
-userInput <- function(prompt) {
+user_input <- function(prompt) {
   if (interactive()) {
     return(readline(prompt))
   } else {
@@ -34,10 +34,10 @@ userInput <- function(prompt) {
 #' Export workbook to xls file.
 #'
 #' @param wb workbook object from workbook package.
-#' @param filename path and file name of the data to export.
+#' @param file_name path and file name of the data to export.
 #' @noRd
-exportXlsFile <- function(wb, filename){
-  openxlsx::saveWorkbook(wb, filename, overwrite = TRUE)
+export_xls_file <- function(wb, file_name){
+  openxlsx::saveWorkbook(wb, file_name, overwrite = TRUE)
 }
 
 
