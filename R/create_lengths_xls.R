@@ -4,7 +4,7 @@
 #' @return a new table in xls format to see the data in a diferent format
 #' where de values of the columns turns to the rows and vice versa
 #' @export
-createLengthsXls <- function(lens) {
+create_lengths_xls <- function(lens) {
   check_lengths <- lens %>%
     select(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO, INICIAL, FINAL, EJEM_MEDIDOS) %>%
     group_by(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO) %>%
