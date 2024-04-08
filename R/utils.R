@@ -5,9 +5,14 @@
 #' @param cod_ports vector with the code ports to filter.
 #' @return data frame filtered by port.
 #' @noRd
-filter_ports <- function(df, cod_ports){
-  f <- df[which(df[["COD_PUERTO"]] %in% cod_ports),]
-  return (f)
+filter_ports <- function(df, cod_ports) {
+  f <- df[which(df[["COD_PUERTO"]] %in% cod_ports), ]
+  if (nrow(f) == 0 || is.na(nrow(f))) {
+    print("ERROR. Los puertos usados para filtrar no se encuentran en el dataframe dado.")
+    winDialog(type = "ok", "ERROR. Los puertos usados para filtrar no se encuentran en el dataframe dado.")
+  } else {
+    return(f)
+  }
 }
 
 
@@ -36,16 +41,16 @@ user_input <- function(prompt) {
 #' @param wb workbook object from workbook package.
 #' @param file_name path and file name of the data to export.
 #' @noRd
-export_xls_file <- function(wb, file_name){
+export_xls_file <- function(wb, file_name) {
   openxlsx::saveWorkbook(wb, file_name, overwrite = TRUE)
 }
 
 
 #' Dialog box to choise our working ports.
-#' 
+#'
 #' @details
-#' This is a function where we developed a dialog box if you want 
-#' to work choosing by your own the ports what you need instead 
+#' This is a function where we developed a dialog box if you want
+#' to work choosing by your own the ports what you need instead
 #' using the conventional way, through a string vector
 #'
 #' @param master_data_port the master data port "PUERTO" from sapmuebase
@@ -55,19 +60,23 @@ manage_dialog_box <- function(master_data_ports) {
   answer <- TRUE
   while (answer) {
     selected_ports <- dlgList(list_port,
-                              multiple = TRUE,
-                              title = "PUERTOS TRABAJO"
+      multiple = TRUE,
+      title = "PUERTOS TRABAJO"
     )
-    
+
     if (length(selected_ports$res) == 0) {
-      warning_message <- winDialog(type = "yesno", 
-                                   message = "¿Está seguro de que no quiere selecionar ningún puerto?")
+      warning_message <- winDialog(
+        type = "yesno",
+        message = "¿Está seguro de que no quiere selecionar ningún puerto?"
+      )
       if (warning_message != "NO") {
         answer <- FALSE
       }
     } else if (length(selected_ports$res) == 1) {
-      warning_message <- winDialog(type = "yesno", 
-                                   message = "Solo ha seleccionado un puerto. ¿Está seguro de que quiere continuar?")
+      warning_message <- winDialog(
+        type = "yesno",
+        message = "Solo ha seleccionado un puerto. ¿Está seguro de que quiere continuar?"
+      )
       if (warning_message != "NO") {
         answer <- FALSE
       }
@@ -75,8 +84,7 @@ manage_dialog_box <- function(master_data_ports) {
       answer <- FALSE
     }
   }
-  
+
   work_ports <- as.vector(selected_ports$res)
   codes_work_ports <- as.vector(master_data_ports[master_data_ports$PUERTO %in% work_ports, "COD_PUERTO"])
 }
-

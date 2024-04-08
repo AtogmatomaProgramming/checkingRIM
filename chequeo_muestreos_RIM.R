@@ -79,3 +79,4 @@ tallas <- importRIMCatchesInLengths(FILENAME_DES_TAL, path = DATA_PATH)
 
 ## CREATE FILES ----------------------------------------------------------------
 createCheckFilesXlsx(capturas_tot, tallas)
+choosePorts()
