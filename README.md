@@ -30,10 +30,10 @@ de carpetas:
 ```
 ↳ (carpeta donde se encuentra el script)
       ↳ data
-          ↳ YEAR
+          ↳ year
               ↳ YEAR_MONTH
 ```
-Siendo YEAR el año y MONTH el mes en dígitos. Por ejemplo:
+Siendo year el año y month el mes en dígitos. Por ejemplo:
 
 
 ![Ejemplo de estructura de la carpetas.](./assets/folders_example.png)
