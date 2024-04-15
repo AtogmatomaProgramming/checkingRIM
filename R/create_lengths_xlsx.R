@@ -1,8 +1,11 @@
-#' Function to create a xlsx file with the lengths sampling document from SIRENO's database
-#' @param lengths: lengths data frame returned by the importRIMLengths() or
-#' importRIMFiles() functions.
-#' @return a new table in xls format to see the data in a different format
-#' where de values of the columns turns to the rows and reversal
+#' Create xlsx file with data of lengths as a resume to check the information.
+#' @param lengths: lengths data frame returned by the importRIMLengths() function.
+#' @param year year of the data. This is used only to name the exported files.
+#' This function doesn't filter by year.
+#' @param month month of the data. This is used only to name the exported files.
+#' This function doesn't filter by month.
+#' @param path path where the 'lengths' file is located and where the exported
+#' files will be saved.
 #' @export
 create_lengths_xlsx <- function(lengths, year, month, path = getwd()) {
   check_lengths <- lengths %>%

@@ -1,7 +1,11 @@
-#' Create header file to facilitate the manual sampling check.
-#' @param lengths Lengths data frame from Sireno report.
-#' @param path Path where lengths file is located and to save the file.
-#' @return Export xlsx file with headers resume.
+#' Create xlsx file with data of headers of samples as a resume to check the information.
+#' @param lengths: lengths data frame returned by the importRIMLengths() function.
+#' @param year year of the data. This is used only to name the exported files.
+#' This function doesn't filter by year.
+#' @param month month of the data. This is used only to name the exported files.
+#' This function doesn't filter by month.
+#' @param path path where the 'lengths' files is located and where the exported
+#' files will be saved.
 #' @export
 create_headers_xlsx <- function(lengths, year, month, path = getwd()) {
   check_headers <- aggregate(lengths[, c("COD_ID"), ],

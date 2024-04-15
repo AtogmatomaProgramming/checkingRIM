@@ -11,21 +11,21 @@
 #' year or month. The exported files contains all the data of the input files.
 #' The 'year' and 'month' parameters are used only to name the exported files.
 #'
-#' @param capturas_tot data frame returned by the importRIMCatches() or
-#' importRIMFiles() functions.
-#' @param tallas lengths data frame returned by the importRIMCatchesInLengths () or
-#' importRIMFiles() functions.
-#' @param puertos vector with the code ports to filter.
-#' @param year year of the data. This is used only to name the exported files. This function doesn't filter by year.
-#' @param month month of the data. This is used only to name the exported files. This function doesn't filter by month.
-#' @param dialog logical. If TRUE, a dialog box is showed to select the ports. If FALSE, the ports are
-#' selected from the vector 'puertos'.
-#' @param path path where the capturas_tot and tallas are located and where the exported files are saved.
-#' @return export all the xlsx files generated
+#' @param catches SIRENO's catches report from ICES project.
+#' @param lengths SIRENO's lengths report from ICES project.
+#' @param ports vector with the code ports to filter.
+#' @param year year of the data. This is used only to name the exported files.
+#' This function doesn't filter by year.
+#' @param month month of the data. This is used only to name the exported files.
+#' This function doesn't filter by month.
+#' @param dialog logical. If TRUE, a dialog box is showed to select the ports.
+#' If FALSE, the ports are selected from the argument 'ports'.
+#' @param path path where the catches and lengths are located and where the
+#' exported files will be saved.
 #' @export
-create_check_files_xlsx <- function(capturas_tot, tallas, puertos, year, month, dialog = FALSE, path = getwd()) {
+create_check_files_xlsx <- function(catches, lengths, ports, year, month, dialog = FALSE, path = getwd()) {
 
-  if (is.null(puertos)) {
+  if (is.null(ports)) {
     dialog <- TRUE
   }
 
@@ -33,16 +33,16 @@ create_check_files_xlsx <- function(capturas_tot, tallas, puertos, year, month, 
   if (dialog) {
     ports <- manage_dialog_box()
   } else {
-    ports <- encode_ports(puertos)
+    ports <- encode_ports(ports)
   }
 
   # import data
-  capturas_tot <- sapmuebase::importRIMCatches(capturas_tot, path = path)
-  tallas <- sapmuebase::importRIMCatchesInLengths(tallas, path = path)
+  catches <- sapmuebase::importRIMCatches(catches, path = path)
+  lengths <- sapmuebase::importRIMCatchesInLengths(lengths, path = path)
 
   # clean data
-  lengths <- filter_ports(tallas, ports)
-  catches <- filter_ports(capturas_tot, ports)
+  lengths <- filter_ports(lengths, ports)
+  catches <- filter_ports(catches, ports)
   catches <- catches[catches$COD_TIPO_MUE == "2", ]
 
 

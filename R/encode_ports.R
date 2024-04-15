@@ -2,9 +2,9 @@
 #' There are two ways: using a vector with the name of the ports or select
 #' them by an emergent window.
 #' @param ports vector with the names of ports
-#' @param dialog_box boolean paramater. If TRUE, the emergent window is showed.
+#' @param dialog_box boolean parameter. If TRUE, the emergent window is showed.
 #' If FALSE, the 'ports' argument must be given. FALSE by default.
-#' @return the code of the ports.
+#' @return vector with the code of the ports.
 #' @export
 encode_ports <- function(ports, dialog_box = FALSE) {
 

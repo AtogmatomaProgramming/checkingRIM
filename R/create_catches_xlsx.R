@@ -1,10 +1,12 @@
-#' Function to create a xls file with the catches sampling document from SIRENO's database
-#' @param catches: data frame returned by the importRIMCatches() or
-#' importRIMFiles() functions.
-#' @param lengths: lengths data frame returned by the importRIMLengths() or
-#' importRIMFiles() functions.
-#' @return a new table in xls format to see the data in a diferent format
-#' where de values of the columns turns to the rows and vice versa
+#' Create xlsx file with data of catches as a resume to check the information.
+#' @param catches: catches data frame returned by the importRIMCatches() function.
+#' @param lengths: lengths data frame returned by the importRIMLengths() function.
+#' @param year year of the data. This is used only to name the exported files.
+#' This function doesn't filter by year.
+#' @param month month of the data. This is used only to name the exported files.
+#' This function doesn't filter by month.
+#' @param path path where the 'catches' file is located and where the exported
+#' files will be saved.
 #' @export
 create_catches_xlsx <- function(catches, lengths, year, month, path = getwd()) {
 
