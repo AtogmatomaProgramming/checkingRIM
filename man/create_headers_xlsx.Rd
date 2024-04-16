@@ -2,18 +2,22 @@
 % Please edit documentation in R/create_headers_xlsx.R
 \name{create_headers_xlsx}
 \alias{create_headers_xlsx}
-\title{Create header file to facilitate the manual sampling check.}
+\title{Create xlsx file with data of headers of samples as a resume to check the information.}
 \usage{
 create_headers_xlsx(lengths, year, month, path = getwd())
 }
 \arguments{
-\item{lengths}{Lengths data frame from Sireno report.}
+\item{year}{year of the data. This is used only to name the exported files.
+This function doesn't filter by year.}
 
-\item{path}{Path where lengths file is located and to save the file.}
-}
-\value{
-Export xlsx file with headers resume.
+\item{month}{month of the data. This is used only to name the exported files.
+This function doesn't filter by month.}
+
+\item{path}{path where the 'lengths' files is located and where the exported
+files will be saved.}
+
+\item{lengths:}{lengths data frame returned by the importRIMLengths() function.}
 }
 \description{
-Create header file to facilitate the manual sampling check.
+Create xlsx file with data of headers of samples as a resume to check the information.
 }

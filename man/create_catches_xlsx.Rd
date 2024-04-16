@@ -2,21 +2,25 @@
 % Please edit documentation in R/create_catches_xlsx.R
 \name{create_catches_xlsx}
 \alias{create_catches_xlsx}
-\title{Function to create a xls file with the catches sampling document from SIRENO's database}
+\title{Create xlsx file with data of catches as a resume to check the information.}
 \usage{
-create_catches_xlsx(lengths, catches, year, month, path = getwd())
+create_catches_xlsx(catches, catches_in_lengths, year, month, path = getwd())
 }
 \arguments{
-\item{catches:}{data frame returned by the importRIMCatches() or
-importRIMFiles() functions.}
+\item{year}{year of the data. This is used only to name the exported files.
+This function doesn't filter by year.}
 
-\item{lengths:}{lengths data frame returned by the importRIMLengths() or
-importRIMFiles() functions.}
-}
-\value{
-a new table in xls format to see the data in a diferent format
-where de values of the columns turns to the rows and vice versa
+\item{month}{month of the data. This is used only to name the exported files.
+This function doesn't filter by month.}
+
+\item{path}{path where the 'catches' file is located and where the exported
+files will be saved.}
+
+\item{catches:}{catches data frame returned by the importRIMCatches() function.}
+
+\item{catches_in_lengths:}{catches in lengths data frame returned by the
+importRIMCatchesInLengths() function.}
 }
 \description{
-Function to create a xls file with the catches sampling document from SIRENO's database
+Create xlsx file with data of catches as a resume to check the information.
 }

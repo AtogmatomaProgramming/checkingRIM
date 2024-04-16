@@ -11,11 +11,11 @@ encode_ports(ports, dialog_box = FALSE)
 \arguments{
 \item{ports}{vector with the names of ports}
 
-\item{dialog_box}{boolean paramater. If TRUE, the emergent window is showed.
+\item{dialog_box}{boolean parameter. If TRUE, the emergent window is showed.
 If FALSE, the 'ports' argument must be given. FALSE by default.}
 }
 \value{
-the code of the ports.
+vector with the code of the ports.
 }
 \description{
 Return the codes of the given ports.
