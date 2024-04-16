@@ -6,7 +6,7 @@ in SIRENO database.
 With devtools package installed:
 ```
 library(devtools)
-install_github("Eucrow/sapmuebase")
+install_github("Eucrow/checkingRIM")
 ```
 
 ## Description
