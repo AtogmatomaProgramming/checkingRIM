@@ -11,9 +11,9 @@ install_github("Eucrow/sapmuebase")
 
 ## Description
 The package contains the function create_check_files_xlsx(), which create three
-xlsx files with the headers, catches and lengths data ready to check. *_Every
-file contains the fields that must be manual verified in order to consider
-the sampling properly checked._*
+xlsx files with the headers, catches and lengths data ready to check. _**Every
+file contains the fields that must be manually verified in order to consider
+the sampling properly checked.**_
 
 Documentation of the function is available with: `?create_check_files_xlsx`
 
@@ -29,8 +29,8 @@ For example:
 - check_catches_2022_01.xlsx
 - check_lengths_2022_01.xlsx
 
-*_Every file contains the fields that must be manual verified in order to consider
-the sampling checked._*
+**_Every file contains the fields that must be manually verified in order to consider
+the sampling checked._**
 
 ### Usage
 ```
@@ -62,12 +62,13 @@ exported files will be saved.
 The function requires the catches and 'catches in lengths' SIRENO reports:
 - catches: IEOUPMUEDESTOT.TXT
 - catches in lengths: IEOUPMUEDESTAL.TXT
-This reports must be downloaded from SIRENO's:
+This reports must be downloaded from SIRENO:
+```
 Informes
    ↳ Listados
       ↳ Ficheros Planos
          ↳ Muestreos Tallas (UP)
-
+```
 
 ### Filter data
 Besides of the 'year' and 'month' parameters, this function doesn't filter by
@@ -80,15 +81,13 @@ Example using the variable 'ports'
 ```r
 library(checkingRIM)
 
-MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances",
-              "Santander")
+MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances", "Santander")
 
 create_check_files_xlsx("IEOUPMUEDESTOTMARCO.TXT",
                         "IEOUPMUEDESTALMARCO.TXT",
                         puertos = MY_PORTS,
                         "2024",
                         "01",
-                        dialog = FALSE,
                         path = "results/2024/2024_01")
 
 ```
