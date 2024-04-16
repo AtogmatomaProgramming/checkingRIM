@@ -1,6 +1,7 @@
 #' Create xlsx file with data of catches as a resume to check the information.
 #' @param catches: catches data frame returned by the importRIMCatches() function.
-#' @param lengths: lengths data frame returned by the importRIMLengths() function.
+#' @param catches_in_lengths: catches in lengths data frame returned by the
+#' importRIMCatchesInLengths() function.
 #' @param year year of the data. This is used only to name the exported files.
 #' This function doesn't filter by year.
 #' @param month month of the data. This is used only to name the exported files.
@@ -8,9 +9,9 @@
 #' @param path path where the 'catches' file is located and where the exported
 #' files will be saved.
 #' @export
-create_catches_xlsx <- function(catches, lengths, year, month, path = getwd()) {
+create_catches_xlsx <- function(catches, catches_in_lengths, year, month, path = getwd()) {
 
-  sampled_species <- lengths[, c("COD_ID", "PUERTO", "FECHA_MUE", "BARCO", "ESP_MUE",
+  sampled_species <- catches_in_lengths[, c("COD_ID", "PUERTO", "FECHA_MUE", "BARCO", "ESP_MUE",
                                  "CATEGORIA", "ESP_CAT", "SEXO")]
 
   check_catches <- merge(catches, sampled_species, all.x = TRUE)
