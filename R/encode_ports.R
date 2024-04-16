@@ -1,37 +1,34 @@
-#' This function gives you the codes of the ports what you are working.
-#' You have two ways: using a vector with the name of the ports or insert
-#' them by an emergent window
-#' @param work_ports vector with the names of our working ports
-#' @param dialog_box boolean paramater to choose if you work by the vector or the
-#' emergent window way. By default is defined with FALSE value, because the main way of
-#' work is through a vector. Then, if you want to work choosing the ports you only
-#' need to declare dialog_box with TRUE
-#' @return the code of the selected working ports
+#' Return the codes of the given ports.
+#' There are two ways: using a vector with the name of the ports or select
+#' them by an emergent window.
+#' @param ports vector with the names of ports
+#' @param dialog_box boolean parameter. If TRUE, the emergent window is showed.
+#' If FALSE, the 'ports' argument must be given. FALSE by default.
+#' @return vector with the code of the ports.
 #' @export
+encode_ports <- function(ports, dialog_box = FALSE) {
 
+  master_ports <- sapmuebase::puerto
 
-encode_ports <- function(work_ports, dialog_box = FALSE) {
-  # Charging the sapmuebase's puerto dataframe
-  master_data_ports <- sapmuebase::puerto
   if (dialog_box) {
-    code_ports <- manage_dialog_box(master_data_ports)
+    code_ports <- manage_dialog_box()
   } else {
-    master_data_ports$PUERTO <- toupper(master_data_ports$PUERTO)
-    master_data_ports$PUERTO <- gsub(" ", "", master_data_ports$PUERTO)
-    df_entry_ports <- data.frame(PUERTO = work_ports)
-    df_entry_ports$PUERTO <- toupper(df_entry_ports$PUERTO)
-    df_entry_ports$PUERTO <- gsub(" ", "", df_entry_ports$PUERTO)
-    df_check_ports <- merge(df_entry_ports, master_data_ports, all.x = TRUE)
-    df_check_ports <- df_check_ports[is.na(df_check_ports$COD_PUERTO), ]
+    master_ports$PUERTO <- toupper(master_ports$PUERTO)
+    master_ports$PUERTO <- gsub(" ", "", master_ports$PUERTO)
+    input_ports <- data.frame(PUERTO = ports)
+    input_ports$PUERTO <- toupper(input_ports$PUERTO)
+    input_ports$PUERTO <- gsub(" ", "", input_ports$PUERTO)
+    wrong_ports <- merge(input_ports, master_ports, all.x = TRUE)
+    wrong_ports <- wrong_ports[is.na(wrong_ports$COD_PUERTO), ]
 
-    if (nrow(df_check_ports) != 0) {
-      wrong_ports <- df_check_ports$PUERTO
+    if (nrow(wrong_ports) != 0) {
+      wrong_ports <- wrong_ports$PUERTO
       wrong_ports <- paste(wrong_ports, collapse = ", ")
-      warningMessage <- paste0("Ha insertado mal/no se encuentran los siguientes puertos: ", wrong_ports, " Por favor, revise los puertos utilizados y ejecute nuevamente la función.")
+      warningMessage <- paste0("No se encuentran los siguientes puertos en el maestro de puertos: ", wrong_ports)
 
       print(warningMessage)
     } else {
-      code_ports <- as.vector(master_data_ports[master_data_ports$PUERTO %in% df_entry_ports$PUERTO, "COD_PUERTO"])
+      code_ports <- as.vector(master_ports[master_ports$PUERTO %in% input_ports$PUERTO, "COD_PUERTO"])
     }
   }
 }

@@ -2,8 +2,8 @@
 #'
 #' @details Variable "COD_PUERTO" is needed in the data frame.
 #' @param df data frame to filter.
-#' @param cod_ports vector with the code ports to filter.
-#' @return data frame filtered by port.
+#' @param cod_ports vector with the code of ports to filter.
+#' @return data frame filtered by ports.
 #' @noRd
 filter_ports <- function(df, cod_ports) {
   f <- df[which(df[["COD_PUERTO"]] %in% cod_ports), ]
@@ -46,22 +46,21 @@ export_xls_file <- function(wb, file_name) {
 }
 
 
-#' Dialog box to choise our working ports.
+#' Dialog box to select ports.
 #'
 #' @details
-#' This is a function where we developed a dialog box if you want
-#' to work choosing by your own the ports what you need instead
-#' using the conventional way, through a string vector
+#' This function show an emergent window with the list of available ports and
+#' manage its logic.
 #'
-#' @param master_data_port the master data port "PUERTO" from sapmuebase
+#' @return vector with the codes of the working ports
 #' @noRd
-manage_dialog_box <- function(master_data_ports) {
-  list_port <- as.vector(master_data_ports$PUERTO)
+manage_dialog_box <- function() {
+  ports <- as.vector(sapmuebase::puerto$PUERTO)
   answer <- TRUE
   while (answer) {
-    selected_ports <- dlgList(list_port,
+    selected_ports <- svDialogs::dlgList(ports,
       multiple = TRUE,
-      title = "PUERTOS TRABAJO"
+      title = "PUERTOS"
     )
 
     if (length(selected_ports$res) == 0) {
@@ -85,6 +84,6 @@ manage_dialog_box <- function(master_data_ports) {
     }
   }
 
-  work_ports <- as.vector(selected_ports$res)
-  codes_work_ports <- as.vector(master_data_ports[master_data_ports$PUERTO %in% work_ports, "COD_PUERTO"])
+  ports <- as.vector(selected_ports$res)
+  ports <- as.vector(sapmuebase::puerto[sapmuebase::puerto$PUERTO %in% ports, "COD_PUERTO"])
 }
