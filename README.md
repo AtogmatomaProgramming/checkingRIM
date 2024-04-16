@@ -33,6 +33,7 @@ For example:
 the sampling checked._*
 
 ### Usage
+```
 create_check_files_xlsx(
   catches,
   catches_in_lengths,
@@ -42,6 +43,7 @@ create_check_files_xlsx(
   dialog = FALSE,
   path = getwd()
 )
+```
 
 ### Arguments
 - *catches*: SIRENO's catches report from ICES project.
