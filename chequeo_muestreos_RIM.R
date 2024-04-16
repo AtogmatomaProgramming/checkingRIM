@@ -22,10 +22,10 @@
 # La estructura de las carpetas para que el script funcione adecuadamente es:
 #   ↳ (carpeta donde se encuentra el script)
 #       ↳ data
-#           ↳ YEAR
+#           ↳ year
 #               ↳ YEAR_MONTH
 #
-# Siendo YEAR el año y MONTH el mes en dígitos.
+# Siendo year el año y month el mes en dígitos.
 #
 # Por ejemplo, la ruta del archivo de cabeceras del mes de enero de 2022 sería:
 # data/2022/2022_01/check_headers_2022_01.xlsx.
@@ -39,44 +39,34 @@
 
 
 ## LIBRARIES -------------------------------------------------------------------
-library(sapmuebase)
+# library(sapmuebase)
 library(dplyr)
-library(openxlsx)
-library(pivottabler)
-source("functions.R")
-source("R/utils.R")
+# library(openxlsx)
+# library(pivottabler)
+# library(svDialogs)
+# source("R/utils.R")
+# source("R/create_check_files_xlsx.R")
+# source("R/create_headers_xlsx.R")
+# source("R/create_lengths_xlsx.R")
+# source("R/create_catches_xlsx.R")
+# source("R/encode_ports.R")
 
-#New needed libraries
+library(checkingRIM)
 
 
-
-## YOU ONLY HAVE TO CHANGE THIS VARIABLES --------------------------------------
-# Year to check
-YEAR <- "2022"
-
-# Month to check, in digits.
-MONTH <- "01"
-
-# File names of SIRENO reports
-FILENAME_DES_TOT <- paste0("IEOUPMUEDESTOTMARCO.TXT")
-FILENAME_DES_TAL <- paste0("IEOUPMUEDESTALMARCO.TXT")
-
-# Ports you want to check. Pay attention to spelling.
+# Ports to check. Pay attention to spelling.
 MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances",
               "Santander")
 
-
-## GLOBAL VARIABLES - DON'T CHANGE IT ------------------------------------------
-
-DATA_PATH <- paste0(getwd(),"/results/", YEAR, "/", YEAR, "_", MONTH)
-
-# Alternative version
-
-## IMPORT DATA -----------------------------------------------------------------
-capturas_tot <- importRIMCatches(FILENAME_DES_TOT, path = DATA_PATH)
-tallas <- importRIMCatchesInLengths(FILENAME_DES_TAL, path = DATA_PATH)
-
+# Path where the input files are stored and the xlsx files will be saved:
+DATA_PATH <- paste0(getwd(), "/results/", year, "/", year, "_", month)
 
 ## CREATE FILES ----------------------------------------------------------------
-createCheckFilesXlsx(capturas_tot, tallas)
-choosePorts()
+create_check_files_xlsx("IEOUPMUEDESTOTMARCO.TXT",
+                        "IEOUPMUEDESTALMARCO.TXT",
+                        puertos = MY_PORTS,
+                        "2024",
+                        "01",
+                        # dialog = TRUE,
+                        path = file.path(getwd(),
+                        "results/2024/2024_01"))

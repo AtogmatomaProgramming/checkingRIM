@@ -4,20 +4,45 @@
 \alias{create_check_files_xlsx}
 \title{Function to create a xls file with the checked samples from SIRENO's database}
 \usage{
-create_check_files_xlsx(capturas_tot, tallas, cod_ports)
+create_check_files_xlsx(
+  capturas_tot,
+  tallas,
+  puertos,
+  year,
+  month,
+  dialog = FALSE,
+  path = getwd()
+)
 }
 \arguments{
-\item{cod_ports}{vector with the code ports to filter.}
-
-\item{capturas_tot:}{data frame returned by the importRIMCatches() or
+\item{capturas_tot}{data frame returned by the importRIMCatches() or
 importRIMFiles() functions.}
 
-\item{tallas:}{lengths data frame returned by the importRIMCatchesInLengths () or
+\item{tallas}{lengths data frame returned by the importRIMCatchesInLengths () or
 importRIMFiles() functions.}
+
+\item{puertos}{vector with the code ports to filter.}
+
+\item{year}{year of the data. This is used only to name the exported files. This function doesn't filter by year.}
+
+\item{month}{month of the data. This is used only to name the exported files. This function doesn't filter by month.}
+
+\item{dialog}{logical. If TRUE, a dialog box is showed to select the ports. If FALSE, the ports are
+selected from the vector 'puertos'.}
+
+\item{path}{path where the capturas_tot and tallas are located and where the exported files are saved.}
 }
 \value{
-export all the previous xls files generated
+export all the xlsx files generated
 }
 \description{
-Function to create a xls file with the checked samples from SIRENO's database
+This function creates three xlsx files with the headers, catches and lengths data ready to check.
+
+The files are saved in the path 'path' with the names 'check_headers_YEAR_MONTH.xlsx',
+'check_catches_YEAR_MONTH.xlsx' and 'check_lengths_YEAR_MONTH.xlsx', where YEAR is the year of the data
+and MONTH is the month of the data.
+
+Besides of the 'year' and 'month' parameters, this function doesn't filter by year or month. The exported
+files contains all the data of the input files. The 'year' and 'month' parameters are used only to name the
+exported files.
 }
