@@ -46,14 +46,13 @@ export_xls_file <- function(wb, file_name) {
 }
 
 
-#' Dialog box to choise our working ports.
+#' Dialog box to choose ports.
 #'
 #' @details
-#' This is a function where we developed a dialog box if you want
-#' to work choosing by your own the ports what you need instead
-#' using the conventional way, through a string vector
-#'
+#' This is a function where through a dialog box it is possible to choose
+#' the instead using a string vector
 #' @param master_data_port the master data port "PUERTO" from sapmuebase
+#' @return the code of the selected ports
 #' @noRd
 manage_dialog_box <- function(master_data_ports) {
   list_port <- as.vector(master_data_ports$PUERTO)
@@ -63,16 +62,8 @@ manage_dialog_box <- function(master_data_ports) {
       multiple = TRUE,
       title = "PUERTOS TRABAJO"
     )
-
-    if (length(selected_ports$res) == 0) {
-      warning_message <- winDialog(
-        type = "yesno",
-        message = "¿Está seguro de que no quiere selecionar ningún puerto?"
-      )
-      if (warning_message != "NO") {
-        answer <- FALSE
-      }
-    } else if (length(selected_ports$res) == 1) {
+    
+    if (length(selected_ports$res) == 1) {
       warning_message <- winDialog(
         type = "yesno",
         message = "Solo ha seleccionado un puerto. ¿Está seguro de que quiere continuar?"
