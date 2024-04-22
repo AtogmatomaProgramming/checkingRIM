@@ -45,7 +45,7 @@ create_check_files_xlsx <- function(catches,
 
   # import data
   catches <- sapmuebase::importRIMCatches(catches, path = path)
-  lengths <- sapmuebase::importRIMCatchesInLengths(lengths, path = path)
+  lengths <- sapmuebase::importRIMCatchesInLengths(catches_in_lengths, path = path)
 
   # clean data
   lengths <- filter_ports(lengths, ports)
