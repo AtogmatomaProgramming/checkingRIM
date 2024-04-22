@@ -1,6 +1,6 @@
 Package: checkingRIM
 Title: Create Files to Facilitate the Checking of Samples.
-Version: 0.2.8
+Version: 0.2.9
 Authors@R: c(
     person("Marco A.", "Ámez Fernández", , "marco.amez@ieo.csic.es", role = c("aut", "cre")),
     person("Eva", "Velasco Gil", , "eva.velasco@ieo.csic.es", role = "aut"),
