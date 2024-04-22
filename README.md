@@ -9,6 +9,16 @@ library(devtools)
 install_github("Eucrow/checkingRIM")
 ```
 
+# Required packages
+`checkingRim` require the next packages:
+```
+    svDialogs
+    dplyr
+    openxlsx
+    pivottabler
+    sapmuebase
+```
+
 ## Description
 The package contains the function create_check_files_xlsx(), which create three
 xlsx files with the headers, catches and lengths data ready to check. _**Every
@@ -34,6 +44,9 @@ the sampling checked._**
 
 ### Usage
 ```
+library(dplyr)
+library(checkingRIM)
+
 create_check_files_xlsx(
   catches,
   catches_in_lengths,

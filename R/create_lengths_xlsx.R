@@ -8,16 +8,16 @@
 #' @param path path where the 'catches_in_lengths' file is located and where the
 #' exported files will be saved.
 #' @export
-create_catches_in_lengths_xlsx <- function(catches_in_lengths, year, month, path = getwd()) {
-  check_catches_in_lengths <- catches_in_lengths %>%
-    select(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO, INICIAL, FINAL, EJEM_MEDIDOS) %>%
-    group_by(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO) %>%
-    summarise(MIN = min(INICIAL), MAX = max(FINAL), SUM_EJEM_MEDIDOS = sum(EJEM_MEDIDOS)) %>%
-    arrange(PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT)
+create_lengths_xlsx <- function(catches_in_lengths, year, month, path = getwd()) {
+  # check_catches_in_lengths <- catches_in_lengths %>%
+  #   select(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO, INICIAL, FINAL, EJEM_MEDIDOS) %>%
+  #   group_by(COD_ID, PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT, SEXO) %>%
+  #   summarise(MIN = min(INICIAL), MAX = max(FINAL), SUM_EJEM_MEDIDOS = sum(EJEM_MEDIDOS)) %>%
+  #   arrange(PUERTO, FECHA_MUE, BARCO, ESP_MUE, CATEGORIA, ESP_CAT)
 
   # generate pivot table
   pt <- pivottabler::PivotTable$new()
-  pt$addData(check_catches_in_lengths)
+  pt$addData(catches_in_lengths)
   pt$addRowDataGroups("PUERTO", addTotal = FALSE)
   pt$addRowDataGroups("FECHA_MUE", addTotal = FALSE)
   pt$addRowDataGroups("BARCO", addTotal = FALSE)
@@ -33,7 +33,7 @@ create_catches_in_lengths_xlsx <- function(catches_in_lengths, year, month, path
   pt_dataframe <- pt$asDataFrame()
 
   wb <- openxlsx::createWorkbook(creator = Sys.getenv("USERNAME"))
-  name_worksheet <- paste("check_catches_in_lengths", year, month, sep = "_")
+  name_worksheet <- paste("check_lengths", year, month, sep = "_")
   openxlsx::addWorksheet(wb, name_worksheet)
   openxlsx::setRowHeights(wb, name_worksheet, rows = nrow(pt_dataframe), heights = 15)
   openxlsx::setColWidths(wb, name_worksheet, cols = c(1:8), widths = c(12, 12, 15, 30, 30, 30, 3, 10))
