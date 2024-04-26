@@ -62,7 +62,7 @@ manage_dialog_box <- function(master_data_ports) {
       multiple = TRUE,
       title = "PUERTOS TRABAJO"
     )
-    
+
     if (length(selected_ports$res) == 1) {
       warning_message <- winDialog(
         type = "yesno",
@@ -71,7 +71,9 @@ manage_dialog_box <- function(master_data_ports) {
       if (warning_message != "NO") {
         answer <- FALSE
       }
-    } 
+    } else {
+      answer <- FALSE
+    }
   }
 
   work_ports <- as.vector(selected_ports$res)
