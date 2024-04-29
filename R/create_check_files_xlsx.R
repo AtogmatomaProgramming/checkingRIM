@@ -26,56 +26,62 @@
 #' @export
 create_check_files_xlsx <- function(catches,
                                     catches_in_lengths,
-                                    ports,
                                     year,
                                     month,
+                                    ports = c(),
                                     dialog = FALSE,
                                     path = getwd()) {
-
-  if (is.null(ports)) {
+  if (length(ports) == 0) {
     dialog <- TRUE
   }
-
+  
+  use_filter_ports <- TRUE
 
   if (dialog) {
     ports <- manage_dialog_box()
+    if (length(ports) == 0) {
+      use_filter_ports <- FALSE
+    }
   } else {
     ports <- encode_ports(ports)
   }
 
-  # import data
-  catches <- sapmuebase::importRIMCatches(catches, path = path)
-  lengths <- sapmuebase::importRIMCatchesInLengths(catches_in_lengths, path = path)
 
-  # clean data
-  lengths <- filter_ports(lengths, ports)
-  catches <- filter_ports(catches, ports)
-  catches <- catches[catches$COD_TIPO_MUE == "2", ]
+  if (use_filter_ports) {
+    # import data
+    catches <- sapmuebase::importRIMCatches(catches, path = path)
+    lengths <- sapmuebase::importRIMCatchesInLengths(catches_in_lengths, path = path)
+
+    # clean data
+    lengths <- filter_ports(lengths, ports)
+    catches <- filter_ports(catches, ports)
+    catches <- catches[catches$COD_TIPO_MUE == "2", ]
 
 
-  # names of files
-  files_paths <- lapply(
-    c("check_headers", "check_catches", "check_lengths"),
-    function(x) {
-      return(file.path(path, paste0(x, "_", year, "_", month, ".xlsx")))
-    }
-  )
-  files_paths <- unlist(files_paths, use.names = FALSE)
+    # names of files
+    files_paths <- lapply(
+      c("check_headers", "check_catches", "check_lengths"),
+      function(x) {
+        return(file.path(path, paste0(x, "_", year, "_", month, ".xlsx")))
+      }
+    )
+    files_paths <- unlist(files_paths, use.names = FALSE)
 
-  if (any(file.exists(files_paths))) {
-    answer <- user_input("Some of the files already exists. Do you want to overwrite? (Y/N) ")
-    if (answer %in% c("Y", "y")) {
+    if (any(file.exists(files_paths))) {
+      answer <- user_input("Some of the files already exists. Do you want to overwrite? (Y/N) ")
+      if (answer %in% c("Y", "y")) {
+        create_headers_xlsx(lengths, year, month, path)
+        create_catches_xlsx(catches, lengths, year, month, path)
+        create_lengths_xlsx(lengths, year, month, path)
+        print("Files saved.")
+      } else {
+        print("Nothing is saved.")
+      }
+    } else {
       create_headers_xlsx(lengths, year, month, path)
-      create_catches_xlsx(catches, lengths, year, month,path)
+      create_catches_xlsx(lengths, year, month, catches, path)
       create_lengths_xlsx(lengths, year, month, path)
       print("Files saved.")
-    } else {
-      print("Nothing is saved.")
     }
-  } else {
-    create_headers_xlsx(lengths, year, month, path)
-    create_catches_xlsx(lengths, year, month, catches, path)
-    create_lengths_xlsx(lengths, year, month, path)
-    print("Files saved.")
   }
 }
