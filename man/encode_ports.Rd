@@ -2,25 +2,23 @@
 % Please edit documentation in R/encode_ports.R
 \name{encode_ports}
 \alias{encode_ports}
-\title{This function gives you the codes of the ports what you are working.
-You have two ways: using a vector with the name of the ports or insert
-them by an emergent window}
+\title{Return the codes of the given ports.
+There are two ways: using a vector with the name of the ports or select
+them by an emergent window.}
 \usage{
-encode_ports(work_ports, dialog_box = FALSE)
+encode_ports(ports, dialog_box = FALSE)
 }
 \arguments{
-\item{work_ports}{vector with the names of our working ports}
+\item{ports}{vector with the names of ports}
 
-\item{dialog_box}{boolean paramater to choose if you work by the vector or the
-emergent window way. By default is defined with FALSE value, because the main way of
-work is through a vector. Then, if you want to work choosing the ports you only
-need to declare dialog_box with TRUE}
+\item{dialog_box}{boolean parameter. If TRUE, the emergent window is showed.
+If FALSE, the 'ports' argument must be given. FALSE by default.}
 }
 \value{
-the code of the selected working ports
+vector with the code of the ports.
 }
 \description{
-This function gives you the codes of the ports what you are working.
-You have two ways: using a vector with the name of the ports or insert
-them by an emergent window
+Return the codes of the given ports.
+There are two ways: using a vector with the name of the ports or select
+them by an emergent window.
 }
