@@ -4,7 +4,9 @@
 .Rdata
 *.Rproj
 
+# Visual Studio Code
+.lintr
+
 # others
 /results
 /scripts_originales
-*.afphoto
