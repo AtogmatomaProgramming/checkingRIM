@@ -7,9 +7,9 @@
 create_check_files_xlsx(
   catches,
   catches_in_lengths,
-  ports,
   year,
   month,
+  ports = c(),
   dialog = FALSE,
   path = getwd()
 )
@@ -19,13 +19,13 @@ create_check_files_xlsx(
 
 \item{catches_in_lengths}{SIRENO's 'catches in lengths' report from ICES project.}
 
-\item{ports}{vector with the code ports to filter.}
-
 \item{year}{year of the data. This is used only to name the exported files.
 This function doesn't filter by year.}
 
 \item{month}{month of the data. This is used only to name the exported files.
 This function doesn't filter by month.}
+
+\item{ports}{vector with the code ports to filter.}
 
 \item{dialog}{logical. If TRUE, a dialog box is showed to select the ports.
 If FALSE, the ports are selected from the argument 'ports'. FALSE by default.}
@@ -40,6 +40,10 @@ data ready to check.
 The files are saved in the path 'path' with the names 'check_headers_YEAR_MONTH.xlsx',
 'check_catches_YEAR_MONTH.xlsx' and 'check_lengths_YEAR_MONTH.xlsx', where
 YEAR is the year of the data and MONTH is the month of the data.
+
+The ports for which the files are created are selected by 'port' argument or by
+an emergent window with a list of ports. Is possible to select multiple ports
+in this window using the 'ctrl' key of the kekyboard and click with the mouse.
 
 Besides of the 'year' and 'month' parameters, this function doesn't filter by
 year or month. The exported files contains all the data of the input files.

@@ -8,6 +8,10 @@
 #' 'check_catches_YEAR_MONTH.xlsx' and 'check_lengths_YEAR_MONTH.xlsx', where
 #' YEAR is the year of the data and MONTH is the month of the data.
 #'
+#' The ports for which the files are created are selected by 'port' argument or by
+#' an emergent window with a list of ports. Is possible to select multiple ports
+#' in this window using the 'ctrl' key of the kekyboard and click with the mouse.
+#'
 #' Besides of the 'year' and 'month' parameters, this function doesn't filter by
 #' year or month. The exported files contains all the data of the input files.
 #' The 'year' and 'month' parameters are used only to name the exported files.
@@ -34,20 +38,16 @@ create_check_files_xlsx <- function(catches,
   if (length(ports) == 0) {
     dialog <- TRUE
   }
-  
-  use_filter_ports <- TRUE
 
   if (dialog) {
     ports <- manage_dialog_box()
     if (length(ports) == 0) {
-      use_filter_ports <- FALSE
+      return("No file was created")
     }
   } else {
     ports <- encode_ports(ports)
   }
 
-
-  if (use_filter_ports) {
     # import data
     catches <- sapmuebase::importRIMCatches(catches, path = path)
     lengths <- sapmuebase::importRIMCatchesInLengths(catches_in_lengths, path = path)
@@ -79,9 +79,9 @@ create_check_files_xlsx <- function(catches,
       }
     } else {
       create_headers_xlsx(lengths, year, month, path)
-      create_catches_xlsx(lengths, year, month, catches, path)
+      create_catches_xlsx(catches, lengths, year, month, path)
       create_lengths_xlsx(lengths, year, month, path)
       print("Files saved.")
     }
-  }
+
 }

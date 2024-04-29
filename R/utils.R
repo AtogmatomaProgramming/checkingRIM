@@ -50,7 +50,8 @@ export_xls_file <- function(wb, file_name) {
 #' Show an emergent window with the list of available ports and
 #' manage its logic.
 #'
-#' @return vector with the codes of the working ports
+#' @return vector with the codes of the working ports. If is canceled, return
+#' a character vector with 0.
 #' @noRd
 manage_dialog_box <- function() {
   ports <- as.vector(sapmuebase::puerto$PUERTO)
