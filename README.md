@@ -50,9 +50,9 @@ library(checkingRIM)
 create_check_files_xlsx(
   catches,
   catches_in_lengths,
-  ports,
   year,
   month,
+  ports,
   dialog = FALSE,
   path = getwd()
 )
@@ -61,15 +61,20 @@ create_check_files_xlsx(
 ### Arguments
 - *catches*: SIRENO's catches report from ICES project.
 - *catches_in_lengths*: SIRENO's 'catches in lengths' report from ICES project.
-- *ports*: vector with the code ports to filter.
 - *year*: year of the data. This is used only to name the exported files.
 This function doesn't filter by year.
 - *month*: month of the data. This is used only to name the exported files.
 This function doesn't filter by month.
+- *ports*: vector with the code ports for which the files will be created.
 - *dialog*: logical. If TRUE, a dialog box is showed to select the ports.
 If FALSE, the ports are selected from the argument 'ports'. FALSE by default.
 - *path*: path where the catches and lengths are located and where the
 exported files will be saved.
+
+#### Use of dialog
+If the 'dialog' argument passed to the function is TRUE, a emergent window with
+a dialog box is showed. Is possible to select multiple ports using the key
+combination of 'ctrl' and click of the mouse.
 
 ### Files required
 The function requires the catches and 'catches in lengths' SIRENO reports:
