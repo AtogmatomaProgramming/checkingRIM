@@ -25,7 +25,7 @@ This function doesn't filter by year.}
 \item{month}{month of the data. This is used only to name the exported files.
 This function doesn't filter by month.}
 
-\item{ports}{vector with the code ports to filter.}
+\item{ports}{vector with the code ports for which the files will be created.}
 
 \item{dialog}{logical. If TRUE, a dialog box is showed to select the ports.
 If FALSE, the ports are selected from the argument 'ports'. FALSE by default.}
@@ -43,7 +43,7 @@ YEAR is the year of the data and MONTH is the month of the data.
 
 The ports for which the files are created are selected by 'port' argument or by
 an emergent window with a list of ports. Is possible to select multiple ports
-in this window using the 'ctrl' key of the kekyboard and click with the mouse.
+in this window using the 'ctrl' key of the keyboard and click with the mouse.
 
 Besides of the 'year' and 'month' parameters, this function doesn't filter by
 year or month. The exported files contains all the data of the input files.
