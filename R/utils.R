@@ -47,9 +47,7 @@ export_xls_file <- function(wb, file_name) {
 
 
 #' Dialog box to select ports.
-#'
-#' @details
-#' This function show an emergent window with the list of available ports and
+#' Show an emergent window with the list of available ports and
 #' manage its logic.
 #'
 #' @return vector with the codes of the working ports
@@ -63,18 +61,10 @@ manage_dialog_box <- function() {
       title = "PUERTOS"
     )
 
-    if (length(selected_ports$res) == 0) {
+    if (length(selected_ports$res) == 1) {
       warning_message <- winDialog(
         type = "yesno",
-        message = "¿Está seguro de que no quiere selecionar ningún puerto?"
-      )
-      if (warning_message != "NO") {
-        answer <- FALSE
-      }
-    } else if (length(selected_ports$res) == 1) {
-      warning_message <- winDialog(
-        type = "yesno",
-        message = "Solo ha seleccionado un puerto. ¿Está seguro de que quiere continuar?"
+        message = "Solo ha seleccionado un puerto. ¿Desea continuar?"
       )
       if (warning_message != "NO") {
         answer <- FALSE
