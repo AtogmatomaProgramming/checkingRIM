@@ -103,7 +103,7 @@ MY_PORTS <- c("Santoña", "San Vicente de la Barquera", "Llanes", "Suances", "Sa
 
 create_check_files_xlsx("IEOUPMUEDESTOTMARCO.TXT",
                         "IEOUPMUEDESTALMARCO.TXT",
-                        puertos = MY_PORTS,
+                        ports = MY_PORTS,
                         "2024",
                         "01",
                         path = "results/2024/2024_01")
